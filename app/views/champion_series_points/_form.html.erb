@@ -1,0 +1,26 @@
+<%= form_for @champion_series_point, :html => { :class => 'form-horizontal' } do |f| %>
+  <div class="control-group">
+    <%= f.label :user_id, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :user_id, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :points, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :points, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :event_id, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :event_id, :class => 'text_field' %>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                champion_series_points_path, :class => 'btn' %>
+  </div>
+<% end %>

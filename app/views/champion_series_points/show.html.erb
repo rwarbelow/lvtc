@@ -1,0 +1,25 @@
+<%- model_class = ChampionSeriesPoint -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:user_id) %>:</strong></dt>
+  <dd><%= @champion_series_point.user_id %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:points) %>:</strong></dt>
+  <dd><%= @champion_series_point.points %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:event_id) %>:</strong></dt>
+  <dd><%= @champion_series_point.event_id %></dd>
+</dl>
+
+<div class="form-actions">
+  <%= link_to t('.back', :default => t("helpers.links.back")),
+              champion_series_points_path, :class => 'btn'  %>
+  <%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_champion_series_point_path(@champion_series_point), :class => 'btn' %>
+  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              champion_series_point_path(@champion_series_point),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>
+</div>

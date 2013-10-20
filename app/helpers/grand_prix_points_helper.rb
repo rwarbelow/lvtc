@@ -1,0 +1,2 @@
+module GrandPrixPointsHelper
+end

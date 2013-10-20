@@ -1,0 +1,40 @@
+<%- model_class = UserInvolvement -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:user_id) %></th>
+      <th><%= model_class.human_attribute_name(:club_involvements_id) %></th>
+      <th><%= model_class.human_attribute_name(:comments) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @user_involvements.each do |user_involvement| %>
+      <tr>
+        <td><%= link_to user_involvement.id, user_involvement_path(user_involvement) %></td>
+        <td><%= user_involvement.user_id %></td>
+        <td><%= user_involvement.club_involvements_id %></td>
+        <td><%= user_involvement.comments %></td>
+        <td><%=l user_involvement.created_at %></td>
+        <td>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_user_involvement_path(user_involvement), :class => 'btn btn-mini' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      user_involvement_path(user_involvement),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-mini btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_user_involvement_path,
+            :class => 'btn btn-primary' %>

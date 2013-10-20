@@ -1,0 +1,40 @@
+<%- model_class = ChampionSeriesPoint -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:user_id) %></th>
+      <th><%= model_class.human_attribute_name(:points) %></th>
+      <th><%= model_class.human_attribute_name(:event_id) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @champion_series_points.each do |champion_series_point| %>
+      <tr>
+        <td><%= link_to champion_series_point.id, champion_series_point_path(champion_series_point) %></td>
+        <td><%= champion_series_point.user_id %></td>
+        <td><%= champion_series_point.points %></td>
+        <td><%= champion_series_point.event_id %></td>
+        <td><%=l champion_series_point.created_at %></td>
+        <td>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_champion_series_point_path(champion_series_point), :class => 'btn btn-mini' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      champion_series_point_path(champion_series_point),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-mini btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_champion_series_point_path,
+            :class => 'btn btn-primary' %>

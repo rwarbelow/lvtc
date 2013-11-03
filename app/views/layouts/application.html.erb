@@ -16,23 +16,28 @@
 	        <span class="icon-bar"></span>
 	        <span class="icon-bar"></span>
 	      </a>
-	      <a class="brand" href="/">Las Vegas Track Club</a>
 	      <div class="nav-collapse">
 	        <ul class="nav">
-	          <li><%= link_to "Event PDF", events_path %></li>
-	          <li><%= link_to "Price List" %></li>
-	          <li><%= link_to "Cart" %></li>
-	          <li><%= link_to "Contact Us" %></li>
+	          <li><%= link_to "About LVTC", about_path %></li>
+	          <li><%= link_to "Past Events", events_path %></li>
+	          <li><%= link_to "Newsletters", newsletters_path %></li>
+	          <li><%= link_to "Championship Series", newsletters_path %></li>
+	          <li><%= link_to "Grand Prix", newsletters_path %></li>
+	          <li><%= link_to "Running Links", local_running_links_path %></li>
+	          <li><%= link_to "Contact" %></li>
+	          <li><%= link_to "Join" %></li>
+	          <li><%= link_to "Login" %></li>
 	        </ul>
 	      </div>
 	    </div>
+	    <div class="text-center"><h1><a href='/'>Las Vegas Track Club</a></h1></div>
 	  </div>
 	</div>
 	<div class="container">
 	  <div class="row">
 	    <div class="span9"><%= yield %></div>
 	  	<div class="span3">
-	      <h2>Calendar</h2>
+	      <h4>Upcoming Events</h4>
 	      <%= link_to "View PDF Calendar", pdf_schedule_path(:pdf) %>
 	      <hr>
 	      <div><% Event.future_events.limit(15).sort! {|a, b| a.date <=> b.date }.each do |event| %>  

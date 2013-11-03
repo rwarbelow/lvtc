@@ -1,0 +1,8 @@
+<% if @event.results_url.empty? %>
+	<h2><%= @event.event_title %></h2>
+	<h4>No results have been posted yet.</h4>
+<% else %>
+	<iframe src="https://docs.google.com/viewer?srcid=<%= @event.results_url %>&pid=explorer&efh=false&a=v&chrome=false&embedded=true" width="650px" height="830px"></iframe>
+<% end %>
+
+

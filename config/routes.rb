@@ -1,4 +1,6 @@
 Lvtc::Application.routes.draw do
+  resources :newsletters
+
   resources :user_memberships
 
   resources :user_events
@@ -18,7 +20,10 @@ Lvtc::Application.routes.draw do
   resources :events
 
   get 'pdf_schedule', :to => 'pdf_schedule#pdf'
-  resources :widgets, only: [:index]
+  get 'about', :to => 'welcome#about'
+  get 'local_running_links', :to => 'welcome#running_links'
+
+  get 'results/:id', :to => 'events#results', :as => "results"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131020224214) do
+ActiveRecord::Schema.define(version: 20131103031535) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,6 +44,8 @@ ActiveRecord::Schema.define(version: 20131020224214) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "championship_series_points"
+    t.string   "results_url"
+    t.string   "photo_url"
   end
 
   create_table "grand_prix_points", force: true do |t|
@@ -60,6 +62,14 @@ ActiveRecord::Schema.define(version: 20131020224214) do
     t.string   "kind"
     t.integer  "price"
     t.integer  "duration"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "newsletters", force: true do |t|
+    t.string   "month"
+    t.string   "year"
+    t.string   "url"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -18,17 +18,14 @@ pre {
   font-size: 11px;
 }
 
-.pinklink {
-  color: #C90886;
-}
-
 a {
   color: #000;
   &:visited {
     color: #666;
   }
   &:hover {
-    color: #C90886;
+    color: #fff;
+    background-color: #000;
   }
 }
 

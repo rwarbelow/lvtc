@@ -16,10 +16,10 @@
 	        <span class="icon-bar"></span>
 	        <span class="icon-bar"></span>
 	      </a>
-	      <a class="brand" href="#">Las Vegas Track Club</a>
+	      <a class="brand" href="/">Las Vegas Track Club</a>
 	      <div class="nav-collapse">
 	        <ul class="nav">
-	          <li><%= link_to "Upcoming Events", events_path %></li>
+	          <li><%= link_to "Event PDF", events_path %></li>
 	          <li><%= link_to "Price List" %></li>
 	          <li><%= link_to "Cart" %></li>
 	          <li><%= link_to "Contact Us" %></li>
@@ -30,12 +30,19 @@
 	</div>
 	<div class="container">
 	  <div class="row">
-	  	<div class="span2">
-	      <h2>About Us</h2>
-	      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>        
+	    <div class="span9"><%= yield %></div>
+	  	<div class="span3">
+	      <h2>Calendar</h2>
+	      <%= link_to "View PDF Calendar", pdf_schedule_path(:pdf) %>
+	      <hr>
+	      <div><% Event.future_events.limit(15).sort! {|a, b| a.date <=> b.date }.each do |event| %>  
+		      <div class="text-info">
+		      	<%= link_to raw('<i class="icon-ok-sign"></i>'), event.website%> <%= link_to event.event_title, "#{event.website}", :class => 'pinklink'%> <br>
+			      	<%= event.date.strftime('%A, %B %d') %> at <%= event.time %>
+			      <hr>
+		      </div>
+	      <% end %>
 	    </div>
-	    <div class="span10"><%= yield %></div>
-	    
 	  </div>
 	</div>
 </body>

@@ -1,4 +1,6 @@
 Lvtc::Application.routes.draw do
+  resources :announcements
+
   resources :newsletters
 
   resources :user_memberships
@@ -18,10 +20,12 @@ Lvtc::Application.routes.draw do
   resources :users
 
   resources :events
-
-  get 'pdf_schedule', :to => 'pdf_schedule#pdf'
   get 'about', :to => 'welcome#about'
+  get 'pdf_schedule', :to => 'pdf_schedule#pdf'
   get 'local_running_links', :to => 'welcome#running_links'
+  get 'join', :to => 'welcome#join'
+  get 'contact', :to => 'welcome#contact', :as => "contact"
+  get 'champion_series_points_pdf', :to => 'welcome#champion_series_points_pdf', :as => "champion_series_points_pdf"
 
   get 'results/:id', :to => 'events#results', :as => "results"
 

@@ -17,33 +17,42 @@
 	        <span class="icon-bar"></span>
 	      </a>
 	      <div class="nav-collapse">
-	        <ul class="nav">
+	        <ul class="nav nav-tabs">
 	          <li><%= link_to "About LVTC", about_path %></li>
 	          <li><%= link_to "Past Events", events_path %></li>
 	          <li><%= link_to "Newsletters", newsletters_path %></li>
-	          <li><%= link_to "Championship Series", newsletters_path %></li>
+	          <li><%= link_to "Championship Series", champion_series_points_pdf_path %></li>
 	          <li><%= link_to "Grand Prix", newsletters_path %></li>
 	          <li><%= link_to "Running Links", local_running_links_path %></li>
-	          <li><%= link_to "Contact" %></li>
 	          <li><%= link_to "Join" %></li>
 	          <li><%= link_to "Login" %></li>
 	        </ul>
 	      </div>
 	    </div>
-	    <div class="text-center"><h1><a href='/'>Las Vegas Track Club</a></h1></div>
 	  </div>
 	</div>
 	<div class="container">
 	  <div class="row">
+	  	<div class="text-center" style="background-image:url('http://bglabs.evade.netdna-cdn.com/wp-content/uploads/2013/04/subtle-mosaic-pattern.png');padding-top:10px;padding-bottom:10px;">
+	  		<%= link_to image_tag("new_logo.png", :size => '600x300'), root_path %> <br>
+	  	</div>
+	  	<br>
 	    <div class="span9"><%= yield %></div>
-	  	<div class="span3">
-	      <h4>Upcoming Events</h4>
-	      <%= link_to "View PDF Calendar", pdf_schedule_path(:pdf) %>
-	      <hr>
+	  	<div class="span3" style="background-color:#F0F0F0">
+	  		<div class="text-center">
+	  			<br>
+					<span style="padding-right:15px"><%= link_to image_tag("facebook.png", :size => '30x30'), 'https://www.facebook.com/lasvegastrackclub' %></span>
+		  		<%= link_to image_tag("twitter.png", :size => '30x30'), 'https://twitter.com/LV_Track_Club' %>
+		  		<hr>
+		  	</div>
+	      <h4 class="text-center">Upcoming Events</h4>
+	      <div class="text-center"><%= link_to "View PDF Calendar", pdf_schedule_path(:pdf) %></div>
+				<hr>
 	      <div><% Event.future_events.limit(15).sort! {|a, b| a.date <=> b.date }.each do |event| %>  
 		      <div class="text-info">
-		      	<%= link_to raw('<i class="icon-ok-sign"></i>'), event.website%> <%= link_to event.event_title, "#{event.website}", :class => 'pinklink'%> <br>
-			      	<%= event.date.strftime('%A, %B %d') %> at <%= event.time %>
+		      	<div style="padding-left:15px; padding-right:15px">
+		      	<strong><%= link_to raw('<i class="icon-calendar"></i>'), event.website%> <%= link_to event.event_title, "#{event.website}", :class => 'pinklink'%></strong> <br>
+			      	<span><%= event.date.strftime('%a, %b %d') %> at <%= event.time %></span></div>
 			      <hr>
 		      </div>
 	      <% end %>

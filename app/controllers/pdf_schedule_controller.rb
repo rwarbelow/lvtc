@@ -1,13 +1,11 @@
 class PdfScheduleController < ApplicationController
 	class Schedule < Prawn::Document
 		def to_pdf
-			logo = "#{Rails.root}/app/assets/images/logo.png"
-			image logo, :width => 150, :height => 75, :position => :center
+			logo = "#{Rails.root}/app/assets/images/new_logo.png"
+			image logo, :width => 300, :height => 100, :position => :center
 			move_down 10
-			font_size 28
-			text "Las Vegas Track Club Schedule", :align => :center
 			font_size 10
-			text "(Printed #{Date.today.strftime('%m/%d/%Y')})", :align => :center
+			text "Event Schedule Updated #{Date.today.strftime('%m/%d/%Y')}", :align => :center
 			move_down 15
 			data = [["Date","Time","Event","Location","Grand Prix"]]
 			all = []

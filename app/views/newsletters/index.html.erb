@@ -1,25 +1,35 @@
-<h1>Listing newsletters</h1>
-
-<table>
+<%- model_class = Newsletter -%>
+<div class="page-header">
+  <h3>LVTC Newsletters</h3>
+</div>
+<table class="table table-striped">
   <thead>
     <tr>
-      <th></th>
-      <th></th>
-      <th></th>
+      <th><%= model_class.human_attribute_name(:year) %></th>
+      <th><%= model_class.human_attribute_name(:month) %></th>
+      <th>Click to View</th>
     </tr>
   </thead>
-
   <tbody>
     <% @newsletters.each do |newsletter| %>
       <tr>
-        <td><%= link_to 'Show', newsletter %></td>
-        <td><%= link_to 'Edit', edit_newsletter_path(newsletter) %></td>
-        <td><%= link_to 'Destroy', newsletter, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= newsletter.year %></td>
+        <td><%= newsletter.month %></td>
+        <td><%= link_to "Southern Nevada Running News", newsletter.url %></td>
+        <td>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_newsletter_path(newsletter), :class => 'btn btn-mini' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      newsletter_path(newsletter),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-mini btn-danger' %>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
-
-<%= link_to 'New Newsletter', new_newsletter_path %>
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_newsletter_path,
+            :class => 'btn btn-primary' %>

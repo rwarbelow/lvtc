@@ -11,10 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131103031535) do
+ActiveRecord::Schema.define(version: 20131104051636) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "announcements", force: true do |t|
+    t.string   "title"
+    t.string   "line_1"
+    t.string   "line_2"
+    t.string   "line_3"
+    t.date     "expiration_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "champion_series_points", force: true do |t|
     t.integer  "user_id"
@@ -46,7 +56,13 @@ ActiveRecord::Schema.define(version: 20131103031535) do
     t.integer  "championship_series_points"
     t.string   "results_url"
     t.string   "photo_url"
+    t.boolean  "front_page"
+    t.string   "front_page_photo_url"
   end
+
+  add_index "events", ["date"], name: "index_events_on_date", using: :btree
+  add_index "events", ["front_page"], name: "index_events_on_front_page", using: :btree
+  add_index "events", ["grand_prix_points"], name: "index_events_on_grand_prix_points", using: :btree
 
   create_table "grand_prix_points", force: true do |t|
     t.integer  "user_id"

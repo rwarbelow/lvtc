@@ -1,0 +1,12 @@
+<p class='text-center'><%= image_tag attachments['new_logo.png'].url, :size => '300x150' %></p>
+<br>
+<hr>
+<br>
+
+<h5>Dear <%= @firstname %> <%= @lastname %>,</h5>
+<p>We have received your payment of <%= @event.formatted_price %> and you are now registered for <%= @event.title %> at <%= @event.location %>. This event is on <%= @event.date.strftime('%a, %b %d') %> at <%= @event.time %>.</p>
+
+<p>Questions? Reply to this email.</p>
+
+<p>See you soon!</p>
+<%= link_to "The Las Vegas Track Club", 'http://lvtc.org' %>

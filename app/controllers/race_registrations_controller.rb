@@ -27,17 +27,24 @@ class RaceRegistrationsController < ApplicationController
   def create
     event = Event.find(params[:event_id])
     token = params[:stripeToken]
+    firstname = params[:firstname]
+    lastname = params[:lastname]
+    email = params[:email]
     begin
       charge = Stripe::Charge.create(
         amount:      event.stripe_price,
         currency:    "usd",
         card:        token,
-        description: params[:email]
+        description: "#{params[:firstname]} #{params[:lastname]},
+                      #{event.title},
+                      #{params[:email]}
+                      "
       )
       @registration = event.race_registrations.create!(
         event_id:   event.id,
         email:      params[:email]
       )
+      UserMailer.registration_confirmation(firstname, lastname, email, event).deliver
       redirect_to pickup_url(guid: @sale.guid)
     rescue Stripe::CardError => e
       @error = e

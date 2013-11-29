@@ -4,41 +4,61 @@
 <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
 
 <h3>Register for <%= @event.title %></h3>
-<%= @event.date %>
-<%= @event.time %>
-<%= @event.location %>
 <% if @error %>
 <%= @error %>
 <% end %>
-<p>Price: <%= @event.formatted_price %></p>
 
-<div class="well" style="margin-left: 0px; position: relative; min-width: 650px; min-height: 180px;
-max-height: 180px">
+<div class="well" style="margin-left: 0px; position: relative; min-width: 510px; min-height: 180px;
+height: 600px">
   <%= form_tag race_registrations_path, :id => 'payment-form' do %>
+    <%= hidden_field_tag :event_id, @event.id %>
+    <table class="table">
+  <thead>
+    <th>Date</th>
+    <th>Location</th>
+    <th>Price</th>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%= @event.time %> on <%= @event.date.strftime('%a, %b %d') %></td>
+      <td><%= @event.location %></td>
+      <td><%= @event.formatted_price %></td>
+    </tr>
+  </tbody>
+</table>
     <div class="row">
-      <%= hidden_field_tag :event_id, @event.id %>
-    </div>
-    <div class="row">
-      <div style="position: absolute; left: 20px">
+      <div style="float: left; padding-left: 25px">
+        <label class="control-label" for="first-name">First Name</label>
+        <input type="text" name="firstname" id="name" style="width: 20em"/>
+￼￼￼   </div>
+      <div style="float:left; padding-left: 25px">
+        <label class="control-label" for="last-name">Last Name</label>
+        <input type="text" size="20" name="lastname" id="name" style="width: 20em"/>
+      </div>
+      <div style="float: left; padding-left: 25px">
         <label class="control-label" for="email">Email</label>
-        <input type="email" name="email" id="email" placeholder="you@example.com" style="width: 25em"/>
-￼￼￼      </div>
-      <div style="position: absolute; left: 400px">
+        <input type="email" name="email" id="email" placeholder="you@example.com" style="width: 20em"/>
+￼￼￼   </div>
+      <div style="float: left; padding-left: 25px">
+        <label class="control-label" for="number">Phone Number</label>
+        <input type="text" name="number" id="number" placeholder="111-222-3456" style="width: 20em"/>
+￼￼￼   </div>
+    </div>
+
+    <div class="row">
+      <div style="float: left; padding-left: 25px">
         <label class="control-label" for="number">Card Number</label>
         <input type="text" size="20" data-stripe="number" id="number" placeholder="**** **** **** ****"
-pattern="[\d ]*" style="width: 18em"/>
+pattern="[\d ]*" style="width: 20em"/>
       </div>
-    </div>
-    <div class="row" style="margin-top: 65px">
-      <div style="position: absolute; left: 20px">
+      <div style="float: left; padding-left: 25px">
         <label class="control-label" for="cvc">CVC</label>
         <input type="text" style="width: 3em" size="3" data-stripe="cvc" id="cvc" placeholder="***"
 pattern="\d*"/>
-        <img id="card-image" src="/img/credit.png" style="height: 30px; padding-left: 10px; margin-top:
--10px">
+        <%= image_tag('credit.png', size:'40x40') %>
       </div>
-      <div style="position: absolute; left: 150px">
-        <label class="control-label">Exp (MM/YYYY)</label>
+      <div style="float: left; padding-left: 25px">
+        <label class="control-label">Expiration Date</label>
         <input style="width: 2em" type="text" size="2" id="exp-month" data-stripe="exp-month"
 placeholder="MM" pattern="\d*"/>
         <span> / </span>
@@ -47,7 +67,8 @@ placeholder="MM" pattern="\d*"/>
       </div>
     </div>
     <div class="row" style="margin-top: 70px">
-    <div style="position: absolute; left: 400px">
+      <h6 style="padding:30px">By clicking the button below, I understand that my card will be charged <%= @event.formatted_price %> and I will be registered for <%= @event.title %>.</h6>
+    <div class="text-center">
         <button type="submit" class="btn btn-primary btn-large">Register</button>
       </div>
     </div>

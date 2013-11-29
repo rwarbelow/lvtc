@@ -1,26 +1,43 @@
 <%- model_class = Event -%>
 <div class="page-header">
-  <h1><%=t '.title', :default => @event.event_title %></h1>
+  <h3><%=t '.title', :default => @event.title %></h3>
+  <% if @event.allow_registration %>
+    <%= form_tag new_race_registration_path, method: :get do |f| %>
+      <%= hidden_field_tag :event_id, @event.id %>
+      <%= submit_tag "Register Online!", :class => 'btn btn-success'  %>
+      <% end %>
+  <% end %>
 </div>
 
-<dl class="dl-horizontal">
-  <dt><strong><%= model_class.human_attribute_name(:date) %>:</strong></dt>
-  <dd><%= @event.date %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:time) %>:</strong></dt>
-  <dd><%= @event.time %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:event_title) %>:</strong></dt>
-  <dd><%= @event.event_title %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:website) %>:</strong></dt>
-  <dd><%= @event.website %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:location) %>:</strong></dt>
-  <dd><%= @event.location %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:contact_name) %>:</strong></dt>
-  <dd><%= @event.contact_name %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:comments) %>:</strong></dt>
-  <dd><%= @event.comments %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:grand_prix_points) %>:</strong></dt>
-  <dd><%= @event.grand_prix_points %></dd>
-</dl>
+<p><strong>Date</strong>: <%= @event.date.strftime('%A, %B %e, %Y') %></p>
+<p><strong>Time</strong>: <%= @event.time %></p>
+<p><strong>Location</strong>: <%= @event.location %></p>
+<p><strong>Website</strong>: <%= link_to @event.website, @event.website %></p>
+<% if @event.price.present? %>
+  <p><strong>Price</strong>: $<%= @event.price %></p>
+<% end %>
+<% if @event.comments.present? %>
+  <p><strong>Comments</strong>: <%= @event.comments %></p>
+<% end %>
+<% if @event.grand_prix_points %>
+  <p><strong>Grand Prix Points</strong>: <%= @event.grand_prix_points %></p>
+<% end %>
+<% if @event.results_url.present? %>
+  <% if @event.results_url[0..3] == "http" %>
+    <p><strong>Results</strong>: <%= link_to "View", @event.results_url %></p>
+  <% else %>
+    <p><strong>Results</strong>: <%= link_to "View", results_path(@event) %></p>
+  <% end %>
+<% end %>
+<% if @event.photo_url.present? %>
+  <p><strong>Photos</strong>: <%= link_to "View", @event.photo_url %></p>
+<% end %>
+
+
+<p><%= @event.description_1 %></p>
+<p><%= @event.description_2 %></p>
+<p><%= @event.description_3 %></p>
+
 
 <div class="form-actions">
   <%= link_to t('.back', :default => t("helpers.links.back")),

@@ -7,14 +7,14 @@
 <% end %>
 
 <% @event = Event.where(:front_page => true).first %>
-<h3 class="text-info"><%= @event.event_title %></h3>
+<h3 class="text-info"><%= link_to @event.title, @event %></h3>
 <blockquote><p><%= @event.date.strftime('%A, %B %e, %Y') %> at <%= @event.time %></p>
 <p><%= @event.location %></p></blockquote>
 
 <img src=<%= @event.front_page_photo_url %>> <br> <br>
 
-<p>Join us for our annual "Predict Your Time, Win a Turkey" 5K Race! No Garmins, watches, iPods, or other timing devices allowed! Those closest to their predicted 5K times will win Thanksgiving turkeys! Those furthest from their predicted times may end up with a TV dinner or other turkey-alternative (tofurky, anyone?).</p>
+<p><%= @event.description_1 %></p>
  
-<p>Silver Bowl Park is located behind Sam Boyd Stadium. It is best reached by taking Galleria Dr. east and making a left on Wiesner Way. It can also be reached via Russell Road to Broadbent Blvd. on a service road to the north of Sam Boyd Stadium. Start and finish on black top in the park. Races will be run on a fast, flat, low-traffic road that begins and ends in the park. 8am start for the 5K. There is no 2-mile race at this event. See you there!</p>
+<p><%= @event.description_2 %></p>
 
-<p>LVTC events are open to all runners; sign up starts about a half hour before the race. The race fee is $3 for members, $5 for non-members. Students 19 and under receive a $1 discount. In an effort to encourage young runners to join us, the LVTC does not charge for runners 10 years of age or younger.</p>
+<p><%= @event.description_3 %></p>

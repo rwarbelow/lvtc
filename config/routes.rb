@@ -1,4 +1,6 @@
 Lvtc::Application.routes.draw do
+  resources :race_registrations
+
   resources :announcements
 
   resources :newsletters
@@ -18,6 +20,8 @@ Lvtc::Application.routes.draw do
   resources :grand_prix_points
 
   resources :users
+  
+  resources :charges
 
   resources :events
   get 'about', :to => 'welcome#about'

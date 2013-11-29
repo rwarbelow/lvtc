@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131104051636) do
+ActiveRecord::Schema.define(version: 20131117192526) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,24 +45,27 @@ ActiveRecord::Schema.define(version: 20131104051636) do
   create_table "events", force: true do |t|
     t.date     "date"
     t.string   "time"
-    t.string   "event_title"
+    t.string   "title"
     t.string   "website"
     t.string   "location"
     t.string   "contact_name"
     t.string   "comments"
-    t.string   "grand_prix_points"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "championship_series_points"
     t.string   "results_url"
     t.string   "photo_url"
     t.boolean  "front_page"
     t.string   "front_page_photo_url"
+    t.integer  "price"
+    t.text     "description_1"
+    t.text     "description_2"
+    t.text     "description_3"
+    t.integer  "grand_prix_points"
+    t.boolean  "allow_registration"
   end
 
   add_index "events", ["date"], name: "index_events_on_date", using: :btree
   add_index "events", ["front_page"], name: "index_events_on_front_page", using: :btree
-  add_index "events", ["grand_prix_points"], name: "index_events_on_grand_prix_points", using: :btree
 
   create_table "grand_prix_points", force: true do |t|
     t.integer  "user_id"
@@ -86,6 +89,13 @@ ActiveRecord::Schema.define(version: 20131104051636) do
     t.string   "month"
     t.string   "year"
     t.string   "url"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "race_registrations", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "event_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

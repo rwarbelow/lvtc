@@ -10,7 +10,7 @@ class PdfScheduleController < ApplicationController
 			data = [["Date","Time","Event","Location","Grand Prix"]]
 			all = []
 			Event.future_events.each do |event|
-				all << [event.date.strftime('%m/%d/%y'), event.time, event.event_title, event.location, ""]
+				all << [event.date.strftime('%m/%d/%y'), event.time, event.title, event.location, ""]
 			end
 			all.each do |race|
 				data += [ [race[0], race[1], race[2], race[3], race[4] ]]

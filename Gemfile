@@ -11,6 +11,8 @@ gem 'sass-rails', '~> 4.0.0'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 gem 'prawn'
+gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
+gem 'bootstrap-datepicker-rails'
 
 group :test, :development do
 	gem 'faker'
@@ -43,7 +45,6 @@ end
 gem 'therubyracer'
 gem "less-rails"
 gem "twitter-bootstrap-rails", "~> 2.0rc0"
-gem 'stripe'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

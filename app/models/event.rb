@@ -20,7 +20,9 @@ class Event < ActiveRecord::Base
 	end
 
 	def stripe_price
-		price * 100
+		if price
+			price * 100
+		end
 	end
 
 end

@@ -38,8 +38,8 @@ height: auto;">
       </div>
     </div>
     <div class="row">
-    	<% if @type == "Family1" || "Family2" || "Family3" || "Family0" %>
-	      <div class='span8 text-center'>
+    	<% if @family %>
+	      <div class='span8'>
           <button id="add-member" class='btn btn-primary btn-small' style="width:136px">Add Another Member</button> &nbsp;
           <button id="delete-member" class='btn btn-primary btn-small' style="width:136px;">Delete Member</button>
         </div>
@@ -66,10 +66,10 @@ height: auto;">
         <input type="text" name="zipcode" id="zipcode" placeholder="Zip Code" style="width: 20em"/>
 ￼￼￼   </div>
 			<div style="float: left; padding-left: 25px">
-        <input type="text" name="number" id="number" placeholder="Cell Phone Number" style="width: 20em"/>
+        <input type="text" name="cell_phone" id="number" placeholder="Cell Phone Number" style="width: 20em"/>
 ￼￼￼   </div>
 			<div style="float: left; padding-left: 25px">
-        <input type="text" name="number" id="number" placeholder="Home Phone Number" style="width: 20em"/>
+        <input type="text" name="home_number" id="number" placeholder="Home Phone Number" style="width: 20em"/>
 ￼￼￼   </div>
     </div>
     <div class="row">
@@ -89,8 +89,8 @@ height: auto;">
         <input style="width: 4em" type="text" size="4" id="exp-year" data-stripe="exp-year" placeholder="YYYY" pattern="\d*"/>
       </div>
     </div>
-    <div class="row" style="margin-top: 70px">
-    <div class="text-center">
+    <div class="row" style="margin-top: 60px">
+    <div class="span8">
         <button type="submit" class="btn btn-primary btn-large">Create New Membership</button>
       </div>
     </div>

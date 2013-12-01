@@ -17,6 +17,7 @@ class UserMembershipsController < ApplicationController
 
   def info
     @type = params[:membership_type]
+    @family = true if @type == "Family1" || @type == "Family2" || @type == "Family3" || @type == "Family0"
   end
 
   # GET /user_memberships/new
@@ -31,21 +32,27 @@ class UserMembershipsController < ApplicationController
   # POST /user_memberships
   # POST /user_memberships.json
   def create
-    token = params[:stripeToken]
+    @token = params[:stripeToken]
     @membership_type = Membership.find_by_kind(params[:membership_type])
-    @user_membership = UserMembership.new(membership_id: @membership_type.id)
-    # @price = @type.stripe_price
+    @user_membership = UserMembership.create(membership_id: @membership_type.id, 
+                                              expiration_date: (Date.today + @membership_type.duration))
     @people = params[:firstname].zip(params[:lastname], params[:birthdate], params[:gender])
-    p @people
     begin
+      @people.each do |person|
+        User.create!(first_name: person[0], last_name: person[1], birthday: person[2], 
+                      gender: person[3], street_address_1: params[:address], 
+                      city: params[:city], zip_code: params[:zipcode], 
+                      email_address: params[:email], home_phone: params[:home_phone], 
+                      cell_phone: params[:cell_phone], user_membership_id: @user_membership.id)
+      end
       charge = Stripe::Charge.create(
-        amount:      @type.stripe_price,
+        amount:      @membership_type.stripe_price,
         currency:    "usd",
-        card:        token,
+        card:        @token,
         description: "#{@people},
                       #{@membership_type.kind}"
       )
-      # UserMailer.membership_confirmation(users).deliver
+      UserMailer.membership_confirmation(@people, @user_membership).deliver
       redirect_to root_path
     rescue Stripe::CardError => e
       @error = e

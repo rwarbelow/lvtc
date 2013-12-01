@@ -1,19 +1,21 @@
 <%- model_class = Event -%>
 <div class="page-header">
-  <h3><%=t '.title', :default => @event.title %> <%= link_to(image_tag("http://digitalshoebox.ca/wp-content/uploads/2013/01/Facebook-Share-Button.png", :size => '55x20'), 
-            "https://www.facebook.com/dialog/feed?
-            app_id=#{ENV['FACEBOOK_APP_ID']}
-            &picture=http://las-vegas-track-club.herokuapp.com/assets/new_logo-b15914286fbc615914da16b7cf080ab7.png
-            &link=http://localhost:3000/events/#{@event.id}
-            &display=popup&name=#{@event.title}
-            &description=#{@event.location}%20at%20#{@event.time}%20on%20#{@event.date}
-            &redirect_uri=http://localhost:3000/events/#{@event.id}")%></h3>
+  <h3><%=t '.title', :default => @event.title %></h3>
+  
   <% if @event.allow_registration %>
     <%= form_tag new_race_registration_path, method: :get do |f| %>
       <%= hidden_field_tag :event_id, @event.id %>
       <%= submit_tag "Register Online!", :class => 'btn btn-success'  %>
       <% end %>
   <% end %>
+  <%= link_to raw('<i class="icon-facebook"> Share on Facebook</i>'), 
+            "https://www.facebook.com/dialog/feed?
+            app_id=#{ENV['FACEBOOK_APP_ID']}
+            &picture=http://las-vegas-track-club.herokuapp.com/assets/new_logo-b15914286fbc615914da16b7cf080ab7.png
+            &link=http://localhost:3000/events/#{@event.id}
+            &display=popup&name=#{@event.title}
+            &description=#{@event.location}%20at%20#{@event.time}%20on%20#{@event.date}
+            &redirect_uri=http://localhost:3000/events/#{@event.id}", :class => 'btn btn-primary'%>
 </div>
 <p><strong>Date</strong>: <%= @event.date.strftime('%A, %B %e, %Y') %></p>
 <p><strong>Time</strong>: <%= @event.time %></p>

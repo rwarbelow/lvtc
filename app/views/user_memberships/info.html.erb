@@ -16,19 +16,19 @@ height: auto;">
         <div class="person">
           <div style="float: left; padding-left: 25px">
           	<label for="person"><strong>Member #1</strong></label>
-            <input type="text" name="firstname[]" id="firstname1" style="width: 20em" placeholder="First Name"/>
+            <input required type="text" name="firstname[]" id="firstname1" style="width: 20em" placeholder="First Name"/>
     ￼￼￼   </div>
           <div style="float:left; padding-left: 25px">
           	<label for="" style="color:white">&nbsp;</label>
-            <input type="text" size="20" name="lastname[]" id="lastname1" style="width: 20em" placeholder="Last Name"/>
+            <input required type="text" size="20" name="lastname[]" id="lastname1" style="width: 20em" placeholder="Last Name"/>
           </div>
           <div style="float:left; padding-left: 25px">
           	<label for="birthdate">Date of Birth</label>
-            <input type="date" size="20" name="birthdate[]" value="2000-01-01" style="width: 20em"/>
+            <input required type="date" size="20" name="birthdate[]" value="2000-01-01" style="width: 20em"/>
           </div>
           <div style="float: left; padding-left: 25px;width: 20em;height:100px">
           	<label for="gender">Gender</label>
-            <select name="gender[]" id="gender">
+            <select required name="gender[]" id="gender" style="width:21em">
             	<option value="">Select from dropdown</option>
             	<option value="female">Female</option>
             	<option value="male">Male</option>
@@ -47,23 +47,23 @@ height: auto;">
     </div>
     <div class="row">
       <div>
-	      <div class="span9">
+	      <div class="span8">
 	      	<hr>
 	      	<h5>Membership Information</h5>
 	      </div>
       </div>
       <div style="float: left; padding-left: 25px">
-        <input type="email" name="email" id="email" placeholder="Email Address" style="width: 20em"/>
+        <input required type="email" name="email" id="email" placeholder="Email Address" style="width: 20em"/>
 ￼￼￼   </div>
 			<div style="float: left; padding-left: 25px">
-        <input type="text" name="address" id="address" placeholder="123 Street Address" style="width: 20em"/>
+        <input required type="text" name="address" id="address" placeholder="123 Street Address" style="width: 20em"/>
 ￼￼￼   </div>
       <div style="float: left; padding-left: 25px">
-        <input type="text" name="number" id="number" placeholder="City" style="width: 14.5em"/>
-        <input style="width: 4em" type="text" id="state" placeholder="State">
+        <input required type="text" name="number" id="number" placeholder="City" style="width: 14.5em"/>
+        <input required style="width: 4em" type="text" id="state" placeholder="State">
 ￼￼￼   </div>
 			<div style="float: left; padding-left: 25px">
-        <input type="text" name="zipcode" id="zipcode" placeholder="Zip Code" style="width: 20em"/>
+        <input required type="text" name="zipcode" id="zipcode" placeholder="Zip Code" style="width: 20em"/>
 ￼￼￼   </div>
 			<div style="float: left; padding-left: 25px">
         <input type="text" name="cell_phone" id="number" placeholder="Cell Phone Number" style="width: 20em"/>
@@ -76,22 +76,30 @@ height: auto;">
     	<div class="span8">
 	    	<hr style='color:black'>
 	    	<h5>Payment Information <%= image_tag('http://www.cartwheelcom.com/images/CreditCardLogos.jpg', size:'110x70') %></h5>
+	    	<p>The cost for the membership you have selected is $<%= @membership.price %>.</p>
 	    </div>
       <div style="float: left; padding-left: 25px">
-        <input type="text" size="20" data-stripe="number" id="number" placeholder="16 Digit Card Number" pattern="[\d ]*" style="width: 20em"/>
+        <input required type="text" size="20" data-stripe="number" id="number" placeholder="16 Digit Card Number" pattern="[\d ]*" style="width: 20em"/>
       </div>
       <div style="float: left; padding-left: 25px">
-        <input type="text" style="width: 3em" size="3" data-stripe="cvc" id="cvc" placeholder="CVC" pattern="\d*"/>
+        <input required type="text" style="width: 3em" size="3" data-stripe="cvc" id="cvc" placeholder="CVC" pattern="\d*"/>
       </div>
       <div style="float: left; padding-left: 25px">
-        Exp:<input style="width: 3em" type="text" size="2" id="exp-month" data-stripe="exp-month" placeholder="MM" pattern="\d*"/>
+        Exp:<input required style="width: 3em" type="text" size="2" id="exp-month" data-stripe="exp-month" placeholder="MM" pattern="\d*"/>
         <span> / </span>
-        <input style="width: 4em" type="text" size="4" id="exp-year" data-stripe="exp-year" placeholder="YYYY" pattern="\d*"/>
+        <input required style="width: 4em" type="text" size="4" id="exp-year" data-stripe="exp-year" placeholder="YYYY" pattern="\d*"/>
       </div>
     </div>
-    <div class="row" style="margin-top: 60px">
-    <div class="span8">
+    <div class="row" style="margin-top: 40px">
+    <div style="margin-left:25px">
+    	<div style="background-color:#FAF7AA;padding:10px">
+    	<p><i><small style="font-size:9px;line-height:7px">I understand that running and volunteering to work in Las Vegas Track Club (LVTC) activities are potentially hazardous activities. I should not enter and run/walk in LVTC activities unless I am medically able and properly trained. I agree to abide by any decision of a race official relative to my ability to safely participate in an event. I assume all risks associated with my participation in LVTC activities including, but not limited to falls, contact with other participants, the effects of the weather including high heat and/or humidity, the condition of the road and traffic on the course, all such risks being known and appreciated by me. Having read this waiver and knowing these facts, and in consideration of your acceptance of my application for membership, I, for myself and anyone entitled to act on my behalf, waive and release the Las Vegas Track, the Road Runners Club of America, and all Sponsors, their representatives and successors from all claims or liabilities of any kind arising out of my participation in these LVTC activities even though that liability may arise out of negligence or carelessness on the part of the persons named in this waiver.</small></i>
+    		</p>
+    		<h5 class='text-center'>I agree to this waiver (enter your initials):<input style="width: 4em" type="text" name="initials" required/></h5>
+    		</div>
+    	<div class='text-center' style='margin-top:20px'>
         <button type="submit" class="btn btn-primary btn-large">Create New Membership</button>
+      </div>
       </div>
     </div>
   <% end %>

@@ -1,5 +1,6 @@
 class WelcomeController < ApplicationController
 	def index
+		@event = Event.where(:front_page => true).first
 	end
 
 	def about

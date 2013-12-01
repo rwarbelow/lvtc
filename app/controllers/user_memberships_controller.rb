@@ -17,6 +17,7 @@ class UserMembershipsController < ApplicationController
 
   def info
     @type = params[:membership_type]
+    @membership = Membership.find_by_kind(params[:membership_type])
     @family = true if @type == "Family1" || @type == "Family2" || @type == "Family3" || @type == "Family0"
   end
 

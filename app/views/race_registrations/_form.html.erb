@@ -9,7 +9,7 @@
 <% end %>
 
 <div class="well" style="margin-left: 0px; position: relative; min-width: 510px; min-height: 180px;
-height: 600px">
+height: auto">
   <%= form_tag race_registrations_path, :id => 'payment-form' do %>
     <%= hidden_field_tag :event_id, @event.id %>
     <table class="table">
@@ -66,7 +66,7 @@ placeholder="MM" pattern="\d*"/>
 "YYYY" pattern="\d*"/>
       </div>
     </div>
-    <div class="row" style="margin-top: 70px">
+    <div class="row" style="margin-top: 40px">
       <h6 style="padding:30px">By clicking the button below, I understand that my card will be charged <%= @event.formatted_price %> and I will be registered for <%= @event.title %>.</h6>
     <div class="text-center">
         <button type="submit" class="btn btn-primary btn-large">Register</button>

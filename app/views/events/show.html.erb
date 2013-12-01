@@ -1,14 +1,14 @@
 <%- model_class = Event -%>
 <div class="page-header">
   <h3><%=t '.title', :default => @event.title %></h3>
-  
+
   <% if @event.allow_registration %>
     <%= form_tag new_race_registration_path, method: :get do |f| %>
       <%= hidden_field_tag :event_id, @event.id %>
-      <%= submit_tag "Register Online!", :class => 'btn btn-success'  %>
+      <%= submit_tag "Register Online", :class => 'btn btn-success'  %>
       <% end %>
   <% end %>
-  <%= link_to raw('<i class="icon-facebook"> Share on Facebook</i>'), 
+  <%= link_to raw('<i class="icon-facebook"> &nbsp;|&nbsp; Share on Facebook</i>'), 
             "https://www.facebook.com/dialog/feed?
             app_id=#{ENV['FACEBOOK_APP_ID']}
             &picture=http://las-vegas-track-club.herokuapp.com/assets/new_logo-b15914286fbc615914da16b7cf080ab7.png

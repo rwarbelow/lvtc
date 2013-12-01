@@ -10,12 +10,12 @@
 	<h3 class="text-info"><%= link_to @event.title, @event %></h3>
 	<blockquote><p><%= @event.date.strftime('%A, %B %e, %Y') %> at <%= @event.time %></p>
 	<p><%= @event.location %></p></blockquote>
-
+	<img src=<%= @event.front_page_photo_url %> height='350' width='350' style='float:right'>
 	<p><%= @event.description_1 %></p>
 	 
 	<p><%= @event.description_2 %></p>
 
 	<p><%= @event.description_3 %></p>
 
-	<img src=<%= @event.front_page_photo_url %>>
+	
 </div>

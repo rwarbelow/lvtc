@@ -38,6 +38,7 @@ GEM
     afm (0.2.0)
     arel (4.0.0)
     atomic (1.1.14)
+    bcrypt-ruby (3.0.1)
     bootstrap-datepicker-rails (1.1.1.9)
       railties (>= 3.0)
     bootstrap_helper (4.2.2.3)
@@ -160,6 +161,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bcrypt-ruby (~> 3.0.0)
   bootstrap-datepicker-rails
   bootstrap_helper
   coffee-rails (~> 4.0.0)

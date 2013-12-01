@@ -44,7 +44,9 @@ class UserMembershipsController < ApplicationController
                       gender: person[3], street_address_1: params[:address], 
                       city: params[:city], zip_code: params[:zipcode], 
                       email_address: params[:email], home_phone: params[:home_phone], 
-                      cell_phone: params[:cell_phone], user_membership_id: @user_membership.id)
+                      cell_phone: params[:cell_phone], user_membership_id: @user_membership.id,
+                      password: @user_membership.membership_code,
+                      password_confirmation: @user_membership.membership_code)
       end
       charge = Stripe::Charge.create(
         amount:      @membership_type.stripe_price,
@@ -53,7 +55,7 @@ class UserMembershipsController < ApplicationController
         description: "#{@people},
                       #{@membership_type.kind}"
       )
-      UserMailer.membership_confirmation(@people, @user_membership).deliver
+      UserMailer.membership_confirmation(@user_membership).deliver
       redirect_to root_path
     rescue Stripe::CardError => e
       @error = e

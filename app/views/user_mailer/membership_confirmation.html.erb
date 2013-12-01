@@ -1,14 +1,19 @@
 <div class='text-center'><%= image_tag attachments['new_logo.png'].url, :size => '200x80' %></div>
 <br>
-<h4>Dear <%= @user_membership.users.first.last_name %> family,</h4>
+<h4>Dear <%= @people.first.first_name %> <%= @people.first.last_name %>,</h4>
 <p>We have received your payment of $<%= @user_membership.membership.price %> for a <%= @user_membership.membership.category %> LVTC membership.</p>
 <p>Members registered under this account are listed below:</p>
 <ol>
 	<% @user_membership.users.each do |user| %>
-	<li><%= user.first_name %> <%= user.last_name %>, <%= user.gender %>, DOB: <%= user.birthday %></li>
+	<li><%= user.first_name %> <%= user.last_name %>, <%= user.gender %>, DOB: <%= user.birthday.strftime('%m/%d/%Y')%></li>
+		<ul>
+			<li>Username: <%= user.username %></li>
+			<li>Password: <%= @user_membership.membership_code %></li>
+		</ul>
 	<% end %>
+	<br>
 </ol>
-<p>This membership (ID: <%= @user_membership.membership_code %>) expires on <%= @user_membership.expiration_date %>.</p>
+<p>Your membership's confirmation code is <%= @user_membership.membership_code %>. This code is also the initial password for member accounts. Passwords can be changed upon login. Membership expires on <%= @user_membership.expiration_date.strftime('%B %e, %Y') %>.</p>
 
 <p>Questions? Reply to this email.</p>
 

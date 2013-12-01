@@ -11,9 +11,9 @@ class UserMailer < ActionMailer::Base
     mail to: email, subject: "Registration Confirmation: #{event.title}"
   end
 
-  def membership_confirmation(people, user_membership)
-  	@people = people
+  def membership_confirmation(user_membership)
   	@user_membership = user_membership
+  	@people = @user_membership.users
 
     attachments.inline["new_logo.png"] = File.read("#{Rails.root}/app/assets/images/new_logo.png")
 

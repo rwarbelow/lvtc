@@ -45,8 +45,7 @@ class UserMembershipsController < ApplicationController
                       city: params[:city], zip_code: params[:zipcode], 
                       email_address: params[:email], home_phone: params[:home_phone], 
                       cell_phone: params[:cell_phone], user_membership_id: @user_membership.id,
-                      password: @user_membership.membership_code,
-                      password_confirmation: @user_membership.membership_code)
+                      password: @user_membership.membership_code)
       end
       charge = Stripe::Charge.create(
         amount:      @membership_type.stripe_price,

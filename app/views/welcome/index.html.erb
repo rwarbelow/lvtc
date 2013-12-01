@@ -8,7 +8,8 @@
 
 <div class="well" style="margin-left: 0px; position: relative; min-width: 510px; min-height: 300px;height: auto;">
 	<h3 class="text-info"><%= link_to @event.title, @event %></h3>
-	<blockquote><img src=<%= @event.front_page_photo_url %> height='320' width='320' style='float:right;border-radius:5px;padding:5px'><p><%= @event.date.strftime('%A, %B %e, %Y') %> at <%= @event.time %></p>
+	<img src=<%= @event.front_page_photo_url %> height='320' width='320' style='margin:5px;float:right;border-radius:5px'>
+	<blockquote><p><%= @event.date.strftime('%A, %B %e, %Y') %> at <%= @event.time %></p>
 	<p><%= @event.location %></p></blockquote>
 	
 	<p><%= @event.description_1 %></p>

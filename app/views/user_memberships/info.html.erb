@@ -1,0 +1,80 @@
+<%= javascript_tag do %>
+  window.stripePubKey = '<%= j Rails.configuration.stripe[:publishable_key] %>';
+<% end %>
+<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+
+<% if @error %>
+<%= @error %>
+<% end %>
+
+<div class="well" style="margin-left: 0px; position: relative; min-width: 510px; min-height: 180px;
+height: 600px">
+  <%= form_tag user_memberships_path, :id => 'payment-form' do %>
+  	<%= hidden_field_tag :membership_type, @type %>
+    <div class="row">
+      <div class="family-membership">
+        <div class="person">
+          <div style="float: left; padding-left: 25px">
+          	<label for="person"><strong>Member #1</strong></label>
+            <input type="text" name="firstname[]" id="firstname1" style="width: 20em" placeholder="First Name"/>
+    ￼￼￼   </div>
+          <div style="float:left; padding-left: 25px">
+          	<label for="" style="color:white">&nbsp;</label>
+            <input type="text" size="20" name="lastname[]" id="lastname1" style="width: 20em" placeholder="Last Name"/>
+          </div>
+          <div style="float:left; padding-left: 25px">
+          	<label for="birthdate">Date of Birth</label>
+            <input type="date" size="20" name="birthdate[]" value="2000-01-01" style="width: 20em"/>
+          </div>
+          <div style="float: left; padding-left: 25px;width: 20em;height:100px">
+          	<label for="gender">Gender</label>
+            <input type="radio" name="gender[]" id="gender" style="padding-right:100px"> Male &nbsp;&nbsp;&nbsp;
+            <input type="radio" name="gender[]" id="gender"> Female
+    ￼￼￼   </div>
+        </div>
+      </div>
+      <% if @type == "Family1" || "Family2" || "Family3" || "Family0" %>
+        <div class='pull-right text-center'>
+          <button id="add-member" class='btn btn-success btn-small'>Add Another Member</button> <br>
+          <button id="delete-member" class='btn btn-danger btn-small' style="width:136px">Delete Member</button>
+        </div>
+      <% end %>
+      <div style="float: left; padding-left: 25px">
+        <label class="control-label" for="email">Email</label>
+        <input type="email" name="email" id="email" placeholder="you@example.com" style="width: 20em"/>
+￼￼￼   </div>
+      <div style="float: left; padding-left: 25px">
+        <label class="control-label" for="number">Phone Number</label>
+        <input type="text" name="number" id="number" placeholder="111-222-3456" style="width: 20em"/>
+￼￼￼   </div>
+    </div>
+    <div class="row">
+      <div style="float: left; padding-left: 25px">
+        <label class="control-label" for="number">Card Number</label>
+        <input type="text" size="20" data-stripe="number" id="number" placeholder="**** **** **** ****"
+pattern="[\d ]*" style="width: 20em"/>
+      </div>
+      <div style="float: left; padding-left: 25px">
+        <label class="control-label" for="cvc">CVC</label>
+        <input type="text" style="width: 3em" size="3" data-stripe="cvc" id="cvc" placeholder="***"
+pattern="\d*"/>
+        <%= image_tag('credit.png', size:'40x40') %>
+      </div>
+      <div style="float: left; padding-left: 25px">
+        <label class="control-label">Expiration Date</label>
+        <input style="width: 2em" type="text" size="2" id="exp-month" data-stripe="exp-month"
+placeholder="MM" pattern="\d*"/>
+        <span> / </span>
+        <input style="width: 3em" type="text" size="4" id="exp-year" data-stripe="exp-year" placeholder=
+"YYYY" pattern="\d*"/>
+      </div>
+    </div>
+    <div class="row" style="margin-top: 70px">
+    <div class="text-center">
+        <button type="submit" class="btn btn-primary btn-large">Create New Membership</button>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+

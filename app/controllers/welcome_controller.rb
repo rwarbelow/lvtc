@@ -1,6 +1,5 @@
 class WelcomeController < ApplicationController
 	def index
-		@announcement = Announcement.first
 	end
 
 	def about
@@ -9,7 +8,7 @@ class WelcomeController < ApplicationController
 	def running_links
 	end
 
-	def join
+	def lvtc_membership
 	end
 
 	def contact

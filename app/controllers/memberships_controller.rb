@@ -24,6 +24,8 @@ class MembershipsController < ApplicationController
   # POST /memberships
   # POST /memberships.json
   def create
+    p "^"*80
+    p params
     @membership = Membership.new(membership_params)
 
     respond_to do |format|

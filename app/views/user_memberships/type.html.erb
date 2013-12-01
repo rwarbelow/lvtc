@@ -1,0 +1,19 @@
+<h3>Select a Membership Type</h3>
+<%= form_tag membership_info_path, method: :get do |f| %>
+  <p><%= radio_button_tag :membership_type, "Individual1" %> Individual for 1 year: $25</p>
+  <p><%= radio_button_tag :membership_type, "Individual2" %> Individual for 2 years: $40</p>
+  <p><%= radio_button_tag :membership_type, "Individual3" %> Individual for 3 years: $50</p>
+  <p><%= radio_button_tag :membership_type, "Individual0" %> Individual lifetime membership: $200</p>
+  <br>
+  <p><%= radio_button_tag :membership_type, "Student1" %> Student (19 and under) for 1 year: $15</p>
+  <p><%= radio_button_tag :membership_type, "Student2" %> Student (19 and under) for 2 years: $25</p>
+  <p><%= radio_button_tag :membership_type, "Student3" %> Student (19 and under) for 3 years: $30</p>
+  <br>
+  <p><%= radio_button_tag :membership_type, "Family1" %> Family for 1 year: $30</p>
+  <p><%= radio_button_tag :membership_type, "Family2" %> Family for 2 years: $50</p>
+  <p><%= radio_button_tag :membership_type, "Family3" %> Family for 1 year: $65</p>
+  <p><%= radio_button_tag :membership_type, "Family0" %> Family lifetime membership: $250</p>
+
+  <%= submit_tag "Continue", :class => 'btn btn-info'  %>
+<% end %>
+

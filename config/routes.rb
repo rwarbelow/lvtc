@@ -24,10 +24,13 @@ Lvtc::Application.routes.draw do
   resources :charges
 
   resources :events
+
   get 'about', :to => 'welcome#about'
   get 'pdf_schedule', :to => 'pdf_schedule#pdf'
   get 'local_running_links', :to => 'welcome#running_links'
-  get 'join', :to => 'welcome#join'
+  get 'lvtc_membership', :to => 'welcome#lvtc_membership'
+  get 'membership_type', :to => 'user_memberships#type'
+  get 'membership_info', :to => 'user_memberships#info'
   get 'contact', :to => 'welcome#contact', :as => "contact"
   get 'champion_series_points_pdf', :to => 'welcome#champion_series_points_pdf', :as => "champion_series_points_pdf"
 

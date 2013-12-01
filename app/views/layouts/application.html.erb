@@ -6,7 +6,6 @@
   <%= javascript_include_tag "https://js.stripe.com/v1/", "application" %>
   <%= csrf_meta_tags %>
   <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
-  <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
@@ -26,7 +25,7 @@
 	          <li><%= link_to "Championship Series", champion_series_points_pdf_path %></li>
 	          <li><%= link_to "Grand Prix", newsletters_path %></li>
 	          <li><%= link_to "Running Links", local_running_links_path %></li>
-	          <li><%= link_to "Join" %></li>
+	          <li><%= link_to "Join", lvtc_membership_path %></li>
 	          <li><%= link_to "Login" %></li>
 	        </ul>
 	      </div>
@@ -35,8 +34,8 @@
 	</div>
 	<div class="container">
 	  <div class="row">
-	  	<div class="text-center" style="background-image:url('http://bglabs.evade.netdna-cdn.com/wp-content/uploads/2013/04/subtle-mosaic-pattern.png');padding-top:10px;padding-bottom:10px;">
-	  		<%= link_to image_tag("new_logo.png", :size => '600x300'), root_path %> <br>
+	  	<div class="text-center" style="background-image:url('/assets/las_vegas.png');padding-top:10px;padding-bottom:10px;height:140px">
+	  		<div><%= link_to image_tag("logo_white.png", :size => '650x300'), root_path %></div> <br>
 	  	</div>
 	  	<br>
 	    <div class="span9"><%= yield %></div>

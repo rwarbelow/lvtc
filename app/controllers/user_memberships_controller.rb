@@ -12,6 +12,13 @@ class UserMembershipsController < ApplicationController
   def show
   end
 
+  def type
+  end
+
+  def info
+    @type = params[:membership_type]
+  end
+
   # GET /user_memberships/new
   def new
     @user_membership = UserMembership.new
@@ -25,16 +32,24 @@ class UserMembershipsController < ApplicationController
   # POST /user_memberships.json
   def create
     @user_membership = UserMembership.new(user_membership_params)
-
-    respond_to do |format|
-      if @user_membership.save
-        format.html { redirect_to @user_membership, notice: 'User membership was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @user_membership }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @user_membership.errors, status: :unprocessable_entity }
-      end
-    end
+    token = params[:stripeToken]
+    @type = Membership.find_by_kind(params[:membership_type])
+    @price = @type.stripe_price
+    @people = params[:firstname].zip(params[:lastname])
+    begin
+      charge = Stripe::Charge.create(
+        amount:      @type.stripe_price,
+        currency:    "usd",
+        card:        token,
+        description: "#{@people},
+                      #{@type}"
+      )
+      # UserMailer.membership_confirmation(users).deliver
+      redirect_to root_path
+    rescue Stripe::CardError => e
+      @error = e
+      render :new
+    end 
   end
 
   # PATCH/PUT /user_memberships/1

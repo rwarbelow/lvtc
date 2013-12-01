@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131129082227) do
+ActiveRecord::Schema.define(version: 20131201005037) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -110,6 +110,7 @@ ActiveRecord::Schema.define(version: 20131129082227) do
     t.string   "state"
     t.string   "zip"
     t.boolean  "waiver"
+    t.string   "confirmation_code"
   end
 
   create_table "user_events", force: true do |t|

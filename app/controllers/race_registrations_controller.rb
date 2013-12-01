@@ -37,12 +37,12 @@ class RaceRegistrationsController < ApplicationController
         card:        token,
         description: "#{params[:firstname]} #{params[:lastname]},
                       #{event.title},
-                      #{params[:email]}
-                      "
+                      #{params[:email]}"
       )
       @registration = event.race_registrations.create!(
         event_id:   event.id,
         email:      params[:email]
+        # fix
       )
       UserMailer.registration_confirmation(firstname, lastname, email, event).deliver
       redirect_to pickup_url(guid: @sale.guid)

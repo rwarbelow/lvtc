@@ -6,7 +6,7 @@
 	</div>
 <% end %>
 
-<div class="well">
+<div class="well" style="height:auto">
 	<h3 class="text-info"><%= link_to @event.title, @event %></h3>
 	<blockquote><p><%= @event.date.strftime('%A, %B %e, %Y') %> at <%= @event.time %></p>
 	<p><%= @event.location %></p></blockquote>

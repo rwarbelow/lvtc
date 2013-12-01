@@ -11,7 +11,8 @@ $(document).ready(function(){
 	    $form.get(0).submit();
 	  }
 	};
-  $("#payment-form").submit(function(){
+  $("#payment-form").submit(function(e){
+  	e.preventDefault();
     var form = $(this);
     form.find('button').prop('disabled', true);
     Stripe.card.createToken(form, stripeResponseHandler);

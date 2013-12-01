@@ -31,18 +31,19 @@ class UserMembershipsController < ApplicationController
   # POST /user_memberships
   # POST /user_memberships.json
   def create
-    @user_membership = UserMembership.new(user_membership_params)
     token = params[:stripeToken]
-    @type = Membership.find_by_kind(params[:membership_type])
-    @price = @type.stripe_price
-    @people = params[:firstname].zip(params[:lastname])
+    @membership_type = Membership.find_by_kind(params[:membership_type])
+    @user_membership = UserMembership.new(membership_id: @membership_type.id)
+    # @price = @type.stripe_price
+    @people = params[:firstname].zip(params[:lastname], params[:birthdate], params[:gender])
+    p @people
     begin
       charge = Stripe::Charge.create(
         amount:      @type.stripe_price,
         currency:    "usd",
         card:        token,
         description: "#{@people},
-                      #{@type}"
+                      #{@membership_type.kind}"
       )
       # UserMailer.membership_confirmation(users).deliver
       redirect_to root_path

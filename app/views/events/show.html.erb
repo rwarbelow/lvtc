@@ -46,7 +46,7 @@
 <p><%= @event.description_2 %></p>
 <p><%= @event.description_3 %></p>
 
-
+<% if current_admin? %>
 <div class="form-actions">
   <%= link_to t('.back', :default => t("helpers.links.back")),
               events_path, :class => 'btn'  %>
@@ -58,3 +58,4 @@
               :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
               :class => 'btn btn-danger' %>
 </div>
+<% end %>

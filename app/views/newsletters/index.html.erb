@@ -17,6 +17,7 @@
         <td><%= newsletter.month %></td>
         <td><%= link_to "Southern Nevada Running News", newsletter.url %></td>
         <td>
+          <% if current_admin? %>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_newsletter_path(newsletter), :class => 'btn btn-mini' %>
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
@@ -24,12 +25,14 @@
                       :method => :delete,
                       :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
                       :class => 'btn btn-mini btn-danger' %>
+                      <% end %>
         </td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
+<% if current_admin? %>
 <%= link_to t('.new', :default => t("helpers.links.new")),
             new_newsletter_path,
             :class => 'btn btn-primary' %>
+<% end %>

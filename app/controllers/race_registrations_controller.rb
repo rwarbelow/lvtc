@@ -45,7 +45,7 @@ class RaceRegistrationsController < ApplicationController
         # fix
       )
       UserMailer.registration_confirmation(firstname, lastname, email, event).deliver
-      redirect_to pickup_url(guid: @sale.guid)
+      redirect_to root_path
     rescue Stripe::CardError => e
       @error = e
       render :new

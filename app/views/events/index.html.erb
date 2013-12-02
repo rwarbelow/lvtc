@@ -1,7 +1,9 @@
 <h3>Results and Photos from Past Events</h3>
+<% if current_admin? %>
     <%= link_to t('.new', :default => t("helpers.links.new")),
               new_event_path,
               :class => 'btn btn-primary' %>
+              <% end %>
               <br> <br>
 
 <table class="table table-hover">

@@ -5,12 +5,12 @@ class SessionsController < ApplicationController
   end
 
   def create
-  	@user = User.where(:username => params[:identity][:username].downcase).first
-  	if @user && @user.authenticate(params[:identity][:password])
+  	@user = User.where(:username => params[:user][:username].downcase).first
+  	if @user && @user.authenticate(params[:user][:password])
   		session[:user_id] = @user.id
-      @user.login_counter += 1
-      @user.password = params[:identity][:password]
-      @user.save
+      # @user.login_counter += 1
+      # @user.password = params[:identity][:password]
+      # @user.save
       redirect_to user_path(@user.id)
     else
       @user = User.new

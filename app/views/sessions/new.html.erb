@@ -1,15 +1,15 @@
 <div class="text-center">
-  <h2>Login</h2>
-</div>
+  <h3>Login</h3>
 
-<%= form_for @user, url: login_path, :html => { :id => "login" } do |f| %>
-  <% if flash[:errors] %>
-    <p class="flash-notice"><%= flash[:errors] %></p>
+  <%= form_for @user, url: login_path, :html => { :id => "login" } do |f| %>
+    <% if flash[:errors] %>
+      <p class="flash-notice"><%= flash[:errors] %></p>
+    <% end %>
+
+    <%= f.text_field :username, placeholder: "username" %>
+   
+    <%= f.password_field :password, placeholder: "password" %>
+    <br>  
+    <%= f.submit value="Log In", :class => "btn btn-large btn-primary" %>
   <% end %>
-
-  <%= f.text_field :username, placeholder: "username" %>
- 
-  <%= f.password_field :password, placeholder: "password" %>
-  <br>  
-  <%= f.submit value="Log In", :class => "btn btn-large btn-primary" %>
-<% end %>
+</div>

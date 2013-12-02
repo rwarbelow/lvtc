@@ -40,12 +40,14 @@ class UserMembershipsController < ApplicationController
     @people = params[:firstname].zip(params[:lastname], params[:birthdate], params[:gender])
     begin
       @people.each do |person|
+        p "Got inside of @people loop"
         User.create(first_name: person[0], last_name: person[1], birthday: person[2], 
                       gender: person[3], street_address_1: params[:address], 
                       city: params[:city], zip_code: params[:zipcode], 
                       email_address: params[:email], home_phone: params[:home_phone], 
                       cell_phone: params[:cell_phone], user_membership_id: @user_membership.id,
                       password: @user_membership.membership_code)
+        p "Got past first person"
       end
       charge = Stripe::Charge.create(
         amount:      @membership_type.stripe_price,

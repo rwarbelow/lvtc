@@ -40,7 +40,7 @@ class UserMembershipsController < ApplicationController
     @people = params[:firstname].zip(params[:lastname], params[:birthdate], params[:gender])
     begin
       @people.each do |person|
-        User.create!(first_name: person[0], last_name: person[1], birthday: person[2], 
+        User.create(first_name: person[0], last_name: person[1], birthday: person[2], 
                       gender: person[3], street_address_1: params[:address], 
                       city: params[:city], zip_code: params[:zipcode], 
                       email_address: params[:email], home_phone: params[:home_phone], 

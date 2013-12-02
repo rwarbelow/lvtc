@@ -33,20 +33,21 @@ class UserMembershipsController < ApplicationController
   # POST /user_memberships
   # POST /user_memberships.json
   def create
+    p params
     @token = params[:stripeToken]
     @membership_type = Membership.find_by_kind(params[:membership_type])
     @people = params[:firstname].zip(params[:lastname], params[:birthdate], params[:gender])
     begin
       @user_membership = UserMembership.create(membership_id: @membership_type.id, 
                                               expiration_date: (Date.today + @membership_type.duration))
-      p @user_membership.membership_code
       @people.each do |person|
         @user = User.create(first_name: person[0], last_name: person[1], birthday: person[2], 
                       gender: person[3], street_address_1: params[:address], 
                       city: params[:city], zip_code: params[:zipcode], 
                       email_address: params[:email], home_phone: params[:home_phone], 
                       cell_phone: params[:cell_phone], user_membership_id: @user_membership.id,
-                      password: @user_membership.membership_code)
+                      password: @user_membership.membership_code, password_confirmation: @user_membership.membership_code)
+        p @user
       end
       charge = Stripe::Charge.create(
         amount:      @membership_type.stripe_price,

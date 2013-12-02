@@ -4,11 +4,15 @@
   <title>Las Vegas Track Club</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "https://js.stripe.com/v1/", "application" %>
+  <%= tag :meta, :name => "stripe-key", :content => Rails.configuration.stripe[:publishable_key] %>
   <%= csrf_meta_tags %>
   <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
+	<%= javascript_tag do %>
+    2    window.stripePubKey = '<%= j Rails.configuration.stripe[:publishable_key] %>';
+    3  <% end %>
 	<div class="navbar navbar-fixed-top">
 	  <div class="navbar-inner">
 	    <div class="container">

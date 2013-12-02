@@ -97,16 +97,19 @@ height: auto;">
     		</p>
     		<h5 class='text-center'>I agree to this waiver (enter your initials):<input style="width: 4em" type="text" name="initials" required/></h5>
     		</div>
+    		<br>
+    		<div id="stripe_error" class='text-center' style='background-color:red;border-radius:10px;'>  
+    			<h4 id="stripe-error"></h4>
+				  <noscript>JavaScript is not enabled and is required for this form. First enable it in your web browser settings.  
+				  </noscript>  
+			</div> 
     	<div class='text-center' style='margin-top:20px'>
         <button type="submit" class="btn btn-primary btn-large">Create New Membership</button>
       </div>
-      <div id="stripe_error">  
-			  <noscript>JavaScript is not enabled and is required for this form. First enable it in your web browser settings.  
-			  </noscript>  
-			</div> 
       </div>
     </div>
   <% end %>
 </div>
+
 
 

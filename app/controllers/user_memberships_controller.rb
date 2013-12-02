@@ -36,10 +36,7 @@ class UserMembershipsController < ApplicationController
     @token = params[:stripeToken]
     @membership_type = Membership.find_by_kind(params[:membership_type])
     @people = params[:firstname].zip(params[:lastname], params[:birthdate], params[:gender])
-    
     begin
-      
-    UserMembership.transaction do
       @user_membership = UserMembership.create(membership_id: @membership_type.id, 
                                               expiration_date: (Date.today + @membership_type.duration))
       @people.each do |person|
@@ -50,21 +47,19 @@ class UserMembershipsController < ApplicationController
                       cell_phone: params[:cell_phone], user_membership_id: @user_membership.id,
                       password: @user_membership.membership_code, password_confirmation: @user_membership.membership_code)
       end
-      begin
-        charge = Stripe::Charge.create(
-          amount:      @membership_type.stripe_price,
-          currency:    "usd",
-          card:        @token,
-          description: "#{@membership_type.kind}: #{@people}"
-        )
-        UserMailer.membership_confirmation(@user_membership).deliver
-        redirect_to root_path
-      rescue Stripe::CardError => e
-        @error = e
-        render :new
-      end 
-    rescue
-    end
+      charge = Stripe::Charge.create(
+        amount:      @membership_type.stripe_price,
+        currency:    "usd",
+        card:        @token,
+        description: "#{@membership_type.kind}: #{@people},
+                      "
+      )
+      UserMailer.membership_confirmation(@user_membership).deliver
+      redirect_to root_path
+    rescue Stripe::CardError => e
+      @error = e
+      render :new
+    end 
   end
 
   # PATCH/PUT /user_memberships/1

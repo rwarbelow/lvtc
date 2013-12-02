@@ -11,8 +11,16 @@
 </head>
 <body>
 	<%= javascript_tag do %>
-    2    window.stripePubKey = '<%= j Rails.configuration.stripe[:publishable_key] %>';
-    3  <% end %>
+    window.stripePubKey = '<%= j Rails.configuration.stripe[:publishable_key] %>';
+    <% end %>
+  <div id="fb-root"></div>
+	<script>(function(d, s, id) {
+	  var js, fjs = d.getElementsByTagName(s)[0];
+	  if (d.getElementById(id)) return;
+	  js = d.createElement(s); js.id = id;
+	  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=479751262145229";
+	  fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));</script>
 	<div class="navbar navbar-fixed-top">
 	  <div class="navbar-inner">
 	    <div class="container">
@@ -30,6 +38,7 @@
 	          <li><%= link_to "Grand Prix", newsletters_path %></li>
 	          <li><%= link_to "Running Links", local_running_links_path %></li>
 	          <li><%= link_to "Join", lvtc_membership_path %></li>
+	          <li></li>
 	          <% if current_user %>
 		        	<li><%= link_to "Logout", logout_path, :method => 'delete' %></li>
 		        <% else %>
@@ -52,6 +61,7 @@
 	  			<br>
 					<span style="padding-right:15px"><%= link_to image_tag("facebook.png", :size => '50x50'), 'https://www.facebook.com/lasvegastrackclub' %></span>
 		  		<%= link_to image_tag("twitter.png", :size => '50x50'), 'https://twitter.com/LV_Track_Club' %>
+		  		<div class="fb-like-box" style="width:90%;margin:0 auto;" data-href="http://www.facebook.com/lasvegastrackclub" data-width="450" data-height="20" data-colorscheme="light" data-show-faces="false" data-header="true" data-stream="false" data-show-border="true"></div>
 		  		<hr style="border:10px solid white">
 		  	</div>
 	      <h3 class="text-center">Upcoming Events</h3>

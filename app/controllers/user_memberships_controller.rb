@@ -35,21 +35,19 @@ class UserMembershipsController < ApplicationController
   def create
     @token = params[:stripeToken]
     @membership_type = Membership.find_by_kind(params[:membership_type])
-    @user_membership = UserMembership.create(membership_id: @membership_type.id, 
-                                              expiration_date: (Date.today + @membership_type.duration))
     @people = params[:firstname].zip(params[:lastname], params[:birthdate], params[:gender])
     begin
+      @user_membership = UserMembership.create(membership_id: @membership_type.id, 
+                                              expiration_date: (Date.today + @membership_type.duration))
+      p @user_membership.membership_code
       @people.each do |person|
-        p "Got inside of @people loop"
         @user = User.create(first_name: person[0], last_name: person[1], birthday: person[2], 
                       gender: person[3], street_address_1: params[:address], 
                       city: params[:city], zip_code: params[:zipcode], 
                       email_address: params[:email], home_phone: params[:home_phone], 
                       cell_phone: params[:cell_phone], user_membership_id: @user_membership.id,
                       password: @user_membership.membership_code)
-        p @user
       end
-      p "Got past all people"
       charge = Stripe::Charge.create(
         amount:      @membership_type.stripe_price,
         currency:    "usd",
@@ -57,7 +55,6 @@ class UserMembershipsController < ApplicationController
         description: "#{@people},
                       #{@membership_type.kind}"
       )
-      p "Almost to mailer"
       UserMailer.membership_confirmation(@user_membership).deliver
       redirect_to root_path
     rescue Stripe::CardError => e

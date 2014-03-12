@@ -56,7 +56,7 @@
 	  	</div>
 	  	<br>
 	    <div class="span9"><%= yield %></div>
-	  	<div class="span3" style="background-color:#F0F0F0">
+	  	<div class="span3" style="background-color:#F0F0F0;margin-bottom:30px">
 	  		<div class="text-center">
 	  			<br>
 					<span style="padding-right:15px"><%= link_to image_tag("facebook.png", :size => '50x50'), 'https://www.facebook.com/lasvegastrackclub' %></span>
@@ -67,7 +67,7 @@
 	      <h3 class="text-center">Upcoming Events</h3>
 	      <div class="text-center"><%= link_to "View PDF Calendar", pdf_schedule_path(:pdf) %></div>
 	      <br>
-	      <div><% Event.future_events.limit(15).sort! {|a, b| a.date <=> b.date }.each do |event| %>  
+	      <div><% @future_events.each do |event| %>  
 		      <div class="text-info">
 		      	<div style="padding-left:15px; padding-right:15px">
 		      	<strong><%= link_to raw('<i class="icon-calendar"></i>'), event.website%> <%= link_to event.title, event_path(event), :class => 'pinklink'%></strong> <br>

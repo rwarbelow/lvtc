@@ -1,6 +1,5 @@
 var stripeResponseHandler = function(status, response) {
   var $form = $('#payment-form');
-  console.log(response)
   if (response.error) {
     $('#stripe-error').text(response.error.message);
     $form.find('button').prop('disabled', false);
